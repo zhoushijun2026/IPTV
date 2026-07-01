@@ -1,0 +1,69 @@
+on开启:
+  schedule:
+    - cron: '0 3 * * *'  # 每日 UTC 03:00（即北京时间 11:00）执行
+  workflow_dispatch:     # 支持手动触发，方便测试或紧急更新
+
+permissions:
+  contents: write内容: 写入
+  packages: read软件包: 读取
+
+jobs:职位职位：职位:
+  iptv-update-job:
+    runs-on: ubuntu-latest运行环境: ubuntu-latest
+    timeout-minutes: 30超时时间（分钟）: 30
+
+    steps:步骤步骤：步骤:
+      - name: 🔍 Checkout code      - 名称:  检出代码
+        uses用途: actions/checkout@v4
+        with:使用:
+          token: ${{ secrets.GITHUB_TOKEN }}令牌: ${{secrets.GITHUB_TOKEN}}令牌: ${{secrets.GITHUB_TOKEN}}令牌: ${{secrets.GITHUB_TOKEN}}
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python 3.11      - 名称:  安装 Python 3.11      - 名称: 🐍 Setup Python 3.11      - 名称:  安装 Python 3.11
+        uses: actions/setup-python@v5用途: actions/setup-python@v5用途: actions/setup-python@v5用途: actions/setup-python@v5
+        with:使用:
+          python-version: '3.11'python版本: '3.11'
+
+      - name: 📦 Install dependencies      - 名称:  安装依赖      - 名称: 安装依赖项
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt || echo "⚠️ requirements.txt not found — skipping"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"pip install -r requirements.txt || echo "⚠️ 未找到 requirements.txt — 跳过"
+
+      - name: ⚙️ Validate & update sources (via iptv-api logic)      - 名称: ️ 验证并更新源（通过iptv-api逻辑） - 名称: ⚙️ 验证并更新源（通过 iptv-api 逻辑）
+        env:环境:
+          CONFIG_FILE: "config/user_config.ini"配置文件: "config/user_config.ini"
+          TEMPLATE_FILE: "config/user_demo.txt"
+        run: |
+          if [ -f "$CONFIG_FILE" ] && [ -f "$TEMPLATE_FILE" ]; then如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则如果 [ -f "$CONFIG_FILE" ] 并且 [ -f "$TEMPLATE_FILE" ]; 则
+            echo "✅ Using custom config: $CONFIG_FILE & template: $TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"echo "✅ 使用自定义配置：$CONFIG_FILE 和模板：$TEMPLATE_FILE"
+            python -m iptv_api.main --config "$CONFIG_FILE" --template "$TEMPLATE_FILE"
+          else否则
+            echo "⚠️ No custom config/template found — falling back to default"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回......echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 —......echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回......echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板......正在回……echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板 — 正在回退至默认值"echo "⚠️ 未找到自定义配置/模板......
+            python -m iptv_api.main
+          fi
+
+      - name: 📄 Generate M3U/TXT output      - 名称:  生成 M3U/TXT 输出      - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出 - 名称: 生成 M3U/TXT 输出
+        run: |
+          mkdir -p output
+          # 支持主流格式：m3u8（带UTF-8 BOM）、txt、json
+          python -c "
+import os, json
+from pathlib import Path从 pathlib 导入 Path
+# 假设 validate_sources.py 输出了 valid_sources.json
+if Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():如果 Path('output/valid_sources.json').exists()如果 Path('output/valid_sources.json').exists():
+    with open('output/valid_sources.json') as f:
+        data = json.load(f)
+    with open('output/iptv.m3u8', 'w', encoding='utf-8-sig') as f:
+        f.write('#EXTM3U\\n')
+        for ch in data.get('channels', []):
+            f.write(f'#EXTINF:-1 tvg-id=\"{ch.get(\"id\", \"\")}\" tvg-name=\"{ch.get(\"name\", \"\")}\" tvg-logo=\"{ch.get(\"logo\", \"\")}\", {ch.get(\"name\", \"\")}\\n{ch.get(\"url\", \"\")}\\n')
+    print('✅ Generated output/iptv.m3u8')print('✅ 生成的输出/iptv.m3u8'))打印('✅ 生成的输出/iptv.m3u8')
+  "
+
+      - name: 📤 Commit & push updated files      - 名称: 提交并推送更新后的文件      - 名称: 提交并推送更新的文件
+        run: |
+          git config --global user.name 'YOYO IPTV Bot'
+          git config --global user.email 'yoyo@honor.com'
+          git add output/*.m3u8 output/*.txt
+          git status --porcelain | grep '^M' && git commit -m "🤖 Auto update IPTV sources — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ No changes to commit"git status --porcelain | grep '^M' && git commit -m "自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改" 自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改"git status --porcelain | grep '^M' && git commit -m "自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改" 自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改"git status --porcelain | grep '^M' && git commit -m "自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改" 自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改"git status --porcelain | grep '^M' && git commit -m "自动更新IPTV源 — $(date '+%Y-%m-%d %H:%M')" || echo "⏭ 无待提交的更改"
+          git push推送推送
