@@ -1,1 +1,20 @@
-
+on开启开启开启开启:
+  push:推送推送：推送推送：推送推送：推送:推送：推送推送：推送推送：推送推送：推送:
+    branches:分支:
+      - main      - 主分支
+  pull_request:拉取请求:
+    branches:分支:
+      - main      - 主分支
+  workflow_dispatch:
+  
+jobs作业:
+  test:测试测试：测试测试：测试测试：测试:
+    runs-on: ubuntu-latest运行环境: ubuntu-latest运行环境: ubuntu-latest运行环境: ubuntu-latest运行环境: ubuntu-latest
+    environment:环境:
+      name: staging名称: 预发布名称: s标签名称: 预发布
+      deployment部署: false部署: 假部署: 假部署: 部署: false部署: 假部署: 假部署: 假部署: false部署: 假部署: 假部署: 假
+    steps:步骤步骤：步骤步骤：步骤步骤：步骤:
+      - name: run tests      - name: 未测试 - 名称: 运行测试
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: echo "Running tests with staging secrets"给"Running tests with staging secrets"“使用预发布环境的密钥运行测试”运行: echo"正在使用预发布环境的密钥运行测试"回声"正在使用预发布环境的密钥运行测试"
